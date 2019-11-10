@@ -13,11 +13,13 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-row v-show="isLoading">
-      <v-col offset="6" cols="6">
-        <v-progress-circular color="blue" indeterminate></v-progress-circular>
-      </v-col>
-    </v-row>
+    <transition name="move">
+      <v-row v-show="isLoading">
+        <v-col offset="6" cols="6">
+          <v-progress-circular color="blue" indeterminate></v-progress-circular>
+        </v-col>
+      </v-row>
+    </transition>
     <v-row v-show="!isLoading">
       <v-col v-for="(track, i) in tracks" :key="i">
         <Track :loading="track.id == selectedTrack" :track="track" @select="setSelectedTrack" />
