@@ -5,6 +5,7 @@ import EventBus from './plugins/event-bus'
 import msToMm from '@/filters/ms-to-mm'
 import VueRouter from 'vue-router'
 import routes from './routes'
+import store from './store'
 
 Vue.use(EventBus)
 Vue.use(msToMm)
@@ -17,5 +18,6 @@ Vue.config.productionTip = false
 new Vue({
   vuetify,
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

@@ -22,15 +22,17 @@
     </transition>
     <v-row v-show="!isLoading">
       <v-col v-for="(track, i) in tracks" :key="i">
-        <Track :loading="track.id == selectedTrack" :track="track" @select="setSelectedTrack" />
+        <Track :loading="track.id == getTrack.id" :track="track" />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import Track from "./Track.vue";
+import { mapGetters } from 'vuex'
 import { TrackApi } from "./../api/trackApi";
+
+import Track from "./Track.vue";
 
 const Api = new TrackApi();
 
@@ -39,10 +41,12 @@ export default {
   components: {
     Track
   },
+  computed: {
+    ...mapGetters(['getTrack'])
+  },
   data: () => ({
     isLoading: null,
     searchSong: "",
-    selectedTrack: "",
     tracks: []
   }),
   methods: {
@@ -55,9 +59,6 @@ export default {
         });
         this.isLoading = false;
       });
-    },
-    setSelectedTrack(id) {
-      this.selectedTrack = id;
     }
   }
 };
